@@ -12,9 +12,9 @@
 #define NAME_LENGTH 64
 #define CMD_LENGTH 256
 
-#define VSH_TableSize 32
+#define BR_TableSize 32
 
-StringMap VSHBaseBoss_ActiveData[MAXPLAYERS+1];
+StringMap BRBaseBoss_ActiveData[MAXPLAYERS+1];
 
 public void OnPluginStart()
 {
@@ -22,9 +22,12 @@ public void OnPluginStart()
 		RegAdminCmd("sm_setasboss", Command_SetAsBoss, ADMFLAG_SLAY);
 		RegAdminCmd("sm_getbossname", Command_GetBossName, ADMFLAG_SLAY);
 		RegAdminCmd("sm_setbosshp", Command_SetBossHP, ADMFLAG_SLAY);
+		RegAdminCmd("sm_getbarhp", Command_GetBarHP, ADMFLAG_SLAY);
 	#endif
+	HookEvent("teamplay_round_start", BR_OnRoundStart, EventHookMode_PostNoCopy);
 }
 
+#include <bossrush/healthbar>
 #include <bossrush/boss>
 #include <bossrush/bossinclude>
 
@@ -35,7 +38,7 @@ public void OnPluginStart()
 		GetCmdArg(1, arg1, sizeof(arg1));
 		
 		
-		VSHBaseBoss Boss = new VSHDaCustomBoss( client );
+		BRBaseBoss Boss = new BRDaCustomBoss( client );
 		char BName[NAME_LENGTH];
 		Boss.GetBossName(BName);
 		PrintToChat(client, "You are boss now. Your name is %s.", BName)
@@ -47,7 +50,7 @@ public void OnPluginStart()
 		char arg1[32];
 		GetCmdArg(1, arg1, sizeof(arg1));
 		
-		VSHBaseBoss Boss = view_as<VSHBaseBoss>(client);
+		BRBaseBoss Boss = view_as<BRBaseBoss>(client);
 		char BossName[NAME_LENGTH];
 		Boss.GetBossName(BossName);
 		PrintToChat(client, BossName);
@@ -59,23 +62,38 @@ public void OnPluginStart()
 		char arg1[32];
 		GetCmdArg(1, arg1, sizeof(arg1));
 		
-		VSHBaseBoss Boss = view_as<VSHBaseBoss>(client);
+		BRBaseBoss Boss = view_as<BRBaseBoss>(client);
 		Boss.BossHealth = StringToFloat(arg1)
 		PrintToChat(client, "You now have %f HP left.", StringToFloat(arg1));
+		return Plugin_Handled;
+	}
+
+	public Action Command_GetBarHP(int client, int args)
+	{
+		char arg1[32];
+		GetCmdArg(1, arg1, sizeof(arg1));
+		
+		BRBaseBoss Boss = view_as<BRBaseBoss>(client);
+		CMonsterResource HPBar = view_as<CMonsterResource>(Boss.HealthBarEnt)
+		PrintToChat(client, "%i", HPBar.ResourceBossHealth);
 		return Plugin_Handled;
 	}
 #endif
 
 public void OnMapStart()
 {
-	ResetVSHBaseBoss();
+	ResetBRBaseBoss();
 }
 
-public void ResetVSHBaseBoss()
+public void BR_OnRoundStart(Event event, const char[] name, bool dontBroadcast)
+{
+	ResetBRBaseBoss();
+}
+
+public void ResetBRBaseBoss()
 {
 	for(int i=1;i<MAXPLAYERS+1;++i)
 	{
-		CloseHandle(VSHBaseBoss_ActiveData[i]);
-		SDKUnhook(i, SDKHook_PostThink, VSH_BossThink);
+		BR_DestroyBoss(i)
 	}
 }

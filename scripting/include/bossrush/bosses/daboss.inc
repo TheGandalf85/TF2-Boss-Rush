@@ -1,4 +1,4 @@
-methodmap VSHDaCustomBoss __nullable__ < VSHBaseBoss
+methodmap BRDaCustomBoss __nullable__ < BRBaseBoss
 {
 
 	/**
@@ -9,8 +9,8 @@ methodmap VSHDaCustomBoss __nullable__ < VSHBaseBoss
 		this.SetBossName("THE BOSS THAT DID NOT");
 		this.CurrentSuper = 0;
 		this.ChargeRatio = 0.2;
-		this.BossHealth = 10000.0;
 		this.BossHealthMax = 10000.0;
+		this.BossHealth = 10000.0;
 	}
 
 	/**
@@ -49,13 +49,13 @@ methodmap VSHDaCustomBoss __nullable__ < VSHBaseBoss
 	}
 	
 	/**
-	 * Create VSHDaCustomBoss instance from the given client index.
+	 * Create BRDaCustomBoss instance from the given client index.
 	 *
 	 * @param clientIndex	The client index to bind this methodmap to.
 	*/
-	public VSHDaCustomBoss( int clientIndex )
+	public BRDaCustomBoss( int clientIndex )
 	{
-		VSHDaCustomBoss Boss = view_as<VSHDaCustomBoss>( new VSHBaseBoss( clientIndex ) );
+		BRDaCustomBoss Boss = view_as<BRDaCustomBoss>( new BRBaseBoss( clientIndex ) );
 		Boss.SetupDataTable();
 		Boss.Initialize();
 		Boss.Startup();

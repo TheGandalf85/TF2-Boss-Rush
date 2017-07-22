@@ -1,7 +1,8 @@
 
 #define SUPER_MAX 1000
+#define HPBAR_MAX 255
 
-methodmap VSHBaseBoss __nullable__ < CTFPlayer
+methodmap BRBaseBoss __nullable__ < CTFPlayer
 {
 
 	/**
@@ -9,7 +10,7 @@ methodmap VSHBaseBoss __nullable__ < CTFPlayer
 	*/
 	public StringMap GetKeyMap()
 	{
-		return VSHBaseBoss_ActiveData[this.Index];
+		return BRBaseBoss_ActiveData[this.Index];
 	}
 	
 	/**
@@ -17,7 +18,7 @@ methodmap VSHBaseBoss __nullable__ < CTFPlayer
 	*/
 	public void SetKeyMap(StringMap keymap)
 	{
-		VSHBaseBoss_ActiveData[this.Index] = keymap;
+		BRBaseBoss_ActiveData[this.Index] = keymap;
 	}
 	
 	/**
@@ -74,13 +75,23 @@ methodmap VSHBaseBoss __nullable__ < CTFPlayer
 		public set( int val ) { this.SetKeyValue("cursuper",val); }
 	}
 	
+	
 	/**
-	 * Gets the amount of Boss Health the boss currently has.
+	 * Gets the Heathbar that is the child of the boss.
 	*/
-	property float BossHealth
+	property int HealthBarEnt
 	{
-		public get() { return view_as<float>(this.GetKeyValue("bosshealth")); }
-		public set( float val ) { this.SetKeyValue("bosshealth",val); }
+		public get() { return view_as<int>(this.GetKeyValue("healthbarentity")); }
+		public set( int val ) { this.SetKeyValue("healthbarentity",val); }
+	}
+	
+	public void UpdateHealthBar(float Health, float MaxHealth)
+	{
+		if(this.HealthBarEnt > 0)
+		{
+			CMonsterResource HealthBar = view_as<CMonsterResource>(this.HealthBarEnt);
+			HealthBar.ResourceBossHealth = RoundFloat(((Health+0.001)/MaxHealth)*HPBAR_MAX);
+		}
 	}
 	
 	/**
@@ -90,6 +101,21 @@ methodmap VSHBaseBoss __nullable__ < CTFPlayer
 	{
 		public get() { return view_as<float>(this.GetKeyValue("bosshealthmax")); }
 		public set( float val ) { this.SetKeyValue("bosshealthmax",val); }
+	}
+	
+	/**
+	 * Gets the amount of Boss Health the boss currently has.
+	*/
+	property float BossHealth
+	{
+		public get() { return view_as<float>(this.GetKeyValue("bosshealth")); }
+		public set( float val )
+		{
+			if(val < 0.0) val = 0.0;
+			this.SetKeyValue("bosshealth",val);
+			this.UpdateHealthBar(val, this.BossHealthMax);
+			this.Health = RoundFloat(val);
+		}
 	}
 	
 	/**
@@ -122,12 +148,15 @@ methodmap VSHBaseBoss __nullable__ < CTFPlayer
 	}
 	
 	/**
-	 * Function that is ran when the VSHBaseBoss instance is created.
+	 * Function that is ran when the BRBaseBoss instance is created.
 	*/
 	public void Initialize()
 	{
-		SDKHook(this.Index, SDKHook_PostThink, VSH_BossThink);
-		SDKHook(this.Index, SDKHook_OnTakeDamageAlive, VSH_BossTakeDamage);
+		SDKHook(this.Index, SDKHook_PostThink, BR_BossThink);
+		SDKHook(this.Index, SDKHook_OnTakeDamageAlive, BR_BossTakeDamage);
+		CMonsterResource HealthBar = BR_GenerateHealthBar(this.Index)
+		this.HealthBarEnt = HealthBar.Index;
+		HealthBar.ResourceBossHealth = 255;
 	}
 	
 	/**
@@ -135,7 +164,7 @@ methodmap VSHBaseBoss __nullable__ < CTFPlayer
 	*/
 	public bool TakeDamage(int attacker, int inflictor, float damage, int damagetype)
 	{	
-		float AddedCharge = (damage/(this.BossHealthMax*this.ChargeRatio))*(this.BossHealthMax*this.ChargeRatio);
+		float AddedCharge = ((damage/(this.BossHealthMax*this.ChargeRatio))*(this.BossHealthMax*this.ChargeRatio))*0.495;
 		this.CurrentSuper += RoundFloat(AddedCharge);
 		this.BossHealth -= damage;
 		PrintToChatAll("%f HP. Gained %i Charge. Now you have %i Total Charge.", this.BossHealth, RoundFloat(AddedCharge), this.CurrentSuper);		
@@ -164,13 +193,13 @@ methodmap VSHBaseBoss __nullable__ < CTFPlayer
 	}
 
 	/**
-	 * Create a VSHBaseBoss instance from the given client index.
+	 * Create a BRBaseBoss instance from the given client index.
 	 *
 	 * @param clientIndex	The client index to bind this methodmap to.
 	*/
-	public VSHBaseBoss( int clientIndex )
+	public BRBaseBoss( int clientIndex )
 	{
-		VSHBaseBoss Boss = view_as<VSHBaseBoss>( new CTFPlayer( clientIndex ) );
+		BRBaseBoss Boss = view_as<BRBaseBoss>( new CTFPlayer( clientIndex ) );
 		Boss.SetupDataTable();
 		Boss.Initialize();
 		return Boss;
@@ -178,22 +207,30 @@ methodmap VSHBaseBoss __nullable__ < CTFPlayer
 	
 }
 
-public Action VSH_BossTakeDamage(int victim, int &attacker, int &inflictor, float &damage, int &damagetype)
+public Action BR_BossTakeDamage(int victim, int &attacker, int &inflictor, float &damage, int &damagetype)
 {
-	VSHBaseBoss Boss = view_as<VSHBaseBoss>(victim);
+	BRBaseBoss Boss = view_as<BRBaseBoss>(victim);
 	if(Boss.TakeDamage(attacker, inflictor, damage, damagetype))
 	{
 		damage=float(Boss.Health);
 	}
 	else
 	{
-		damage=0.0;
+		damage=1.0;
+		Boss.Health = RoundFloat(Boss.BossHealth);
 	}
 	return Plugin_Changed;
 }
 
-public void VSH_BossThink(int index)
+public void BR_BossThink(int index)
 {
-	VSHBaseBoss Boss = view_as<VSHBaseBoss>(index);
+	BRBaseBoss Boss = view_as<BRBaseBoss>(index);
 	Boss.Think()
+}
+
+public void BR_DestroyBoss(int index)
+{
+	SDKUnhook(index, SDKHook_PostThink, BR_BossThink);
+	SDKUnhook(index, SDKHook_OnTakeDamageAlive, BR_BossTakeDamage);
+	CloseHandle(BRBaseBoss_ActiveData[index]);
 }
