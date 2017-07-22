@@ -21,12 +21,12 @@ public void OnPluginStart()
 	#if defined DEBUG_MODE
 		RegAdminCmd("sm_setasboss", Command_SetAsBoss, ADMFLAG_SLAY);
 		RegAdminCmd("sm_getbossname", Command_GetBossName, ADMFLAG_SLAY);
+		RegAdminCmd("sm_setbosshp", Command_SetBossHP, ADMFLAG_SLAY);
 	#endif
 }
 
 #include <bossrush/boss>
 #include <bossrush/bossinclude>
-
 
 #if defined DEBUG_MODE
 	public Action Command_SetAsBoss(int client, int args)
@@ -51,6 +51,17 @@ public void OnPluginStart()
 		char BossName[NAME_LENGTH];
 		Boss.GetBossName(BossName);
 		PrintToChat(client, BossName);
+		return Plugin_Handled;
+	}
+
+	public Action Command_SetBossHP(int client, int args)
+	{
+		char arg1[32];
+		GetCmdArg(1, arg1, sizeof(arg1));
+		
+		VSHBaseBoss Boss = view_as<VSHBaseBoss>(client);
+		Boss.BossHealth = StringToFloat(arg1)
+		PrintToChat(client, "You now have %f HP left.", StringToFloat(arg1));
 		return Plugin_Handled;
 	}
 #endif

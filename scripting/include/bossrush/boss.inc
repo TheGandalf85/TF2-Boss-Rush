@@ -183,7 +183,7 @@ public Action VSH_BossTakeDamage(int victim, int &attacker, int &inflictor, floa
 	VSHBaseBoss Boss = view_as<VSHBaseBoss>(victim);
 	if(Boss.TakeDamage(attacker, inflictor, damage, damagetype))
 	{
-		damage=view_as<float>(Boss.Health);
+		damage=float(Boss.Health);
 	}
 	else
 	{
