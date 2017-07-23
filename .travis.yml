@@ -31,7 +31,7 @@ before_script:
     - mv sourcemod-transitional-helpers-master/thelpers/* addons/sourcemod/scripting/include/thelpers
 
     - chmod +x addons/sourcemod/scripting/spcomp
-    - mkdir compiled addons/sourcemod/scripting/compiled/bossrush
+    - mkdir compiled addons/sourcemod/scripting/compiled
     - cd addons/sourcemod/scripting/
 script: ./compile.sh bossrush.sp
 
