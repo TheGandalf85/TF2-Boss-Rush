@@ -14,7 +14,7 @@ Boss Rush is pretty much my own version of Freak Fortress / Versus Saxton Hale a
 #### Current Unstable Build Status (SourceMod 1.9, Dev Branch)
 [![Dev Build Status](https://travis-ci.org/GameMaster85/TF2-Boss-Rush.svg?branch=dev)](https://travis-ci.org/GameMaster85/TF2-Boss-Rush)
 
-## Dependancies
+## Dependencies
 
 **[TF2 Items](https://forums.alliedmods.net/showthread.php?t=115100)** - [Build(s)](https://builds.limetech.io/?p=tf2items) - By asherkin
 
