@@ -18,7 +18,7 @@ env:
 # And compile!
 install:
     - wget --input-file=http://sourcemod.net/smdrop/$SMVERSION/sourcemod-latest-linux
-    - tar -xzf $(cat sourcemod-latest-linux)
+    - tar -xvzf $(cat sourcemod-latest-linux)
 before_script:
     - cd scripting/
     - wget "https://raw.githubusercontent.com/asherkin/TF2Items/master/pawn/tf2items.inc" -O include/tf2items.inc
@@ -26,8 +26,9 @@ before_script:
     - wget "https://raw.githubusercontent.com/asherkin/SteamTools/master/plugin/steamtools.inc" -O include/steamtools.inc
     - wget "https://bitbucket.org/GoD_Tony/updater/raw/default/include/updater.inc" -O include/updater.inc
     - wget "https://raw.githubusercontent.com/FlaminSarge/tf2attributes/master/tf2attributes.inc" -O include/tf2attributes.inc
-    - wget "https://github.com/VoiDeD/sourcemod-transitional-helpers/archive/master.zip" -O include/sourcemod-transitional-helpers-master.zip
-    - unzip include/sourcemod-transitional-helpers-master.zip -d include/
+    - wget "https://github.com/VoiDeD/sourcemod-transitional-helpers/archive/master.zip" -O ../sourcemod-transitional-helpers-master.zip
+    - unzip ../sourcemod-transitional-helpers-master.zip
+    - mv ../sourcemod-transitional-helpers-master/include/* include/
 
     - chmod +x spcomp
     - mkdir compiled compiled/bossrush
