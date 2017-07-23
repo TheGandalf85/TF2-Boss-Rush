@@ -30,7 +30,7 @@ before_script:
     - mkdir thelpers sourcemod/scripting/include/thelpers
     - mv sourcemod-transitional-helpers-master/thelpers/* sourcemod/scripting/include/thelpers
 
-    - chmod +x scripting/spcomp
+    - chmod +x sourcemod/scripting/spcomp
     - mkdir compiled sourcemod/scripting/compiled/bossrush
     - cd sourcemod/scripting/
 script: ./compile.sh bossrush.sp
