@@ -4,6 +4,8 @@
 ## Introduction
 Boss Rush is pretty much my own version of Freak Fortress / Versus Saxton Hale and all of its branches. I'm building it from the ground up mostly for myself so that I can have a better and easier time taking care of a server that runs it, as well as just having a much more modular way of making bosses as well as other things involving the gamemode.
 
+**Note that currently this mod is currently in the works. It is non-functional and does not have a release yet.**
+
 ## Build Statuses
 
 #### Current Stable Build Status (SourceMod 1.8, Master Branch)
