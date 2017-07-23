@@ -1,5 +1,5 @@
 # Boss Rush!
-## Team Fortress 2 Boss Rush Mode! A mode where true heroes fight in the world among the wicked, nasty, and overall cruel.
+### Team Fortress 2 Boss Rush Mode! A mode where true heroes fight in the world among the wicked, nasty, and overall cruel.
 
 ## Introduction
 Boss Rush is pretty much my own version of Freak Fortress / Versus Saxton Hale and all of its branches. I'm building it from the ground up mostly for myself so that I can have a better and easier time taking care of a server that runs it, as well as just having a much more modular way of making bosses as well as other things involving the gamemode.
