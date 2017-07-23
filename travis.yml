@@ -1,0 +1,37 @@
+# 50Wilu's Travis script taken from the FF2 Official GitHub repo. Never heard of Travis but it sounds neat so I'll use it! Thanks 50Wilu!
+
+# Use the new container-based infrastructure
+sudo: false
+
+# Install some apt packages needed for spcomp
+addons:
+
+    apt:
+        packages:
+            - lib32stdc++6
+
+# Set the build environment
+env:
+    - SMVERSION=1.8 # Stable
+    - SMVERSION=1.9 # Unstable
+
+# And compile!
+install:
+    - wget --input-file=http://sourcemod.net/smdrop/$SMVERSION/sourcemod-latest-linux
+    - tar -xzf $(cat sourcemod-latest-linux)
+before_script:
+    - cd scripting/
+    - wget "https://raw.githubusercontent.com/asherkin/TF2Items/master/pawn/tf2items.inc" -O include/tf2items.inc
+    - wget "http://www.doctormckay.com/download/scripting/include/morecolors.inc" -O include/morecolors.inc
+    - wget "https://raw.githubusercontent.com/asherkin/SteamTools/master/plugin/steamtools.inc" -O include/steamtools.inc
+    - wget "https://bitbucket.org/GoD_Tony/updater/raw/default/include/updater.inc" -O include/updater.inc
+    - wget "https://raw.githubusercontent.com/FlaminSarge/tf2attributes/master/tf2attributes.inc" -O include/tf2attributes.inc
+    - tar -xzfO "https://github.com/VoiDeD/sourcemod-transitional-helpers/archive/master.zip" "include/"
+
+    - chmod +x spcomp
+    - mkdir compiled compiled/bossrush
+script: ./compile.sh bossrush.sp
+
+# Notifications
+notifications:
+email: false
