@@ -1,13 +1,16 @@
 # Boss Rush!
-## Team Fortress 2 Boss Rush Mode! A mode where true heroes fight in the world among the wicked, nasty, and overall cruel.
+#### Team Fortress 2 Boss Rush Mode! A mode where true heroes fight in the world among the wicked, nasty, and overall cruel.
 
 ## Introduction
 Boss Rush is pretty much my own version of Freak Fortress / Versus Saxton Hale and all of its branches. I'm building it from the ground up mostly for myself so that I can have a better and easier time taking care of a server that runs it, as well as just having a much more modular way of making bosses as well as other things involving the gamemode.
 
-## Versions
+## Build Statuses
 
-### Current Stable Version
-[![Build Status](https://travis-ci.org/GameMaster85/TF2-Boss-Rush.svg?branch=master)](https://travis-ci.org/GameMaster85/TF2-Boss-Rush)
+#### Current Stable Build Status (SourceMod 1.8, Master Branch)
+[![Master Build Status](https://travis-ci.org/GameMaster85/TF2-Boss-Rush.svg?branch=master)](https://travis-ci.org/GameMaster85/TF2-Boss-Rush)
+
+#### Current Unstable Build Status (SourceMod 1.9, Dev Branch)
+[![Dev Build Status](https://travis-ci.org/GameMaster85/TF2-Boss-Rush.svg?branch=dev)](https://travis-ci.org/GameMaster85/TF2-Boss-Rush)
 
 ## Features
 
