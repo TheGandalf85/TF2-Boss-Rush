@@ -17,10 +17,15 @@ Boss Rush is pretty much my own version of Freak Fortress / Versus Saxton Hale a
 ## Dependancies
 
 **[TF2 Items](https://forums.alliedmods.net/showthread.php?t=115100)** - [Build(s)](https://builds.limetech.io/?p=tf2items) - By asherkin
+
 **[More Colors](https://forums.alliedmods.net/showthread.php?t=185016)** - [Build(s)](https://www.doctormckay.com/download/scripting/include/morecolors.inc) - By Dr. McKay
+
 **[SteamTools](https://forums.alliedmods.net/forumdisplay.php?f=147)** - [Build(s)](https://builds.limetech.io/?p=steamtools) - By asherkin
+
 **[Updater](https://forums.alliedmods.net/showthread.php?t=169095)** - [Build(s)](https://bitbucket.org/GoD_Tony/updater/downloads/) - By GoD-Tony
+
 **[TF2 Attributes](https://forums.alliedmods.net/showthread.php?t=210221)** - [Build(s)](https://github.com/FlaminSarge/tf2attributes/releases) - By FlaminSarge
+
 **[SourceMod Transitional Helpers](https://github.com/VoiDeD/sourcemod-transitional-helpers)** - By VoiDeD
 
 
