@@ -20,19 +20,19 @@ install:
     - wget --input-file=http://sourcemod.net/smdrop/$SMVERSION/sourcemod-latest-linux
     - tar -xvzf $(cat sourcemod-latest-linux)
 before_script:
-    - wget "https://raw.githubusercontent.com/asherkin/TF2Items/master/pawn/tf2items.inc" -O scripting/include/tf2items.inc
-    - wget "http://www.doctormckay.com/download/scripting/include/morecolors.inc" -O scripting/include/morecolors.inc
-    - wget "https://raw.githubusercontent.com/asherkin/SteamTools/master/plugin/steamtools.inc" -O scripting/include/steamtools.inc
-    - wget "https://bitbucket.org/GoD_Tony/updater/raw/default/include/updater.inc" -O scripting/include/updater.inc
-    - wget "https://raw.githubusercontent.com/FlaminSarge/tf2attributes/master/tf2attributes.inc" -O scripting/include/tf2attributes.inc
+    - wget "https://raw.githubusercontent.com/asherkin/TF2Items/master/pawn/tf2items.inc" -O sourcemod/scripting/include/tf2items.inc
+    - wget "http://www.doctormckay.com/download/scripting/include/morecolors.inc" -O sourcemod/scripting/include/morecolors.inc
+    - wget "https://raw.githubusercontent.com/asherkin/SteamTools/master/plugin/steamtools.inc" -O sourcemod/scripting/include/steamtools.inc
+    - wget "https://bitbucket.org/GoD_Tony/updater/raw/default/include/updater.inc" -O sourcemod/scripting/include/updater.inc
+    - wget "https://raw.githubusercontent.com/FlaminSarge/tf2attributes/master/tf2attributes.inc" -O sourcemod/scripting/include/tf2attributes.inc
     - wget "https://github.com/VoiDeD/sourcemod-transitional-helpers/archive/master.zip" -O sourcemod-transitional-helpers-master.zip
     - unzip sourcemod-transitional-helpers-master.zip
-    - mkdir thelpers scripting/include/thelpers
-    - mv sourcemod-transitional-helpers-master/thelpers/* scripting/include/thelpers
+    - mkdir thelpers sourcemod/scripting/include/thelpers
+    - mv sourcemod-transitional-helpers-master/thelpers/* sourcemod/scripting/include/thelpers
 
     - chmod +x scripting/spcomp
-    - mkdir compiled scripting/compiled/bossrush
-    - cd scripting/
+    - mkdir compiled sourcemod/scripting/compiled/bossrush
+    - cd sourcemod/scripting/
 script: ./compile.sh bossrush.sp
 
 # Notifications
