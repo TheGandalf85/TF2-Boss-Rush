@@ -27,7 +27,7 @@ before_script:
     - wget "https://bitbucket.org/GoD_Tony/updater/raw/default/include/updater.inc" -O include/updater.inc
     - wget "https://raw.githubusercontent.com/FlaminSarge/tf2attributes/master/tf2attributes.inc" -O include/tf2attributes.inc
     - wget "https://github.com/VoiDeD/sourcemod-transitional-helpers/archive/master.zip" -O include/sourcemod-transitional-helpers-master.zip
-    - tar -xvzf include/sourcemod-transitional-helpers-master.zip
+    - unzip include/sourcemod-transitional-helpers-master.zip -d include/
 
     - chmod +x spcomp
     - mkdir compiled compiled/bossrush
