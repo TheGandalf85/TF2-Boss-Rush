@@ -1,2 +1,3 @@
 *.exe
-scripting/include/*.inc
+scripting/include/*
+scripting/include/thelpers/**
