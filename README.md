@@ -7,10 +7,10 @@ Boss Rush is pretty much my own version of Freak Fortress / Versus Saxton Hale a
 ## Build Statuses
 
 #### Current Stable Build Status (SourceMod 1.8, Master Branch)
-[![Master Build Status](https://travis-ci.org/GameMaster85/TF2-Boss-Rush.svg?branch=dev)](https://travis-ci.org/GameMaster85/TF2-Boss-Rush)
+[![Master Build Status](https://travis-ci.org/GameMaster85/TF2-Boss-Rush.svg?branch=master)](https://travis-ci.org/GameMaster85/TF2-Boss-Rush)
 
 #### Current Unstable Build Status (SourceMod 1.9, Dev Branch)
-[![Dev Build Status](https://travis-ci.org/GameMaster85/TF2-Boss-Rush.svg?branch=master)](https://travis-ci.org/GameMaster85/TF2-Boss-Rush)
+[![Dev Build Status](https://travis-ci.org/GameMaster85/TF2-Boss-Rush.svg?branch=dev)](https://travis-ci.org/GameMaster85/TF2-Boss-Rush)
 
 ## Features
 
