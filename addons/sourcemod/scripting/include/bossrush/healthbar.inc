@@ -40,6 +40,9 @@ methodmap CMonsterResource __nullable__
 		public get() { return IsValidEntity( this.Ref ); }
 	}
 	
+	/**
+	 * Gets where the healthbar is at, from 1-255. Clamped above 1, since the bar disappears if the value is less then 1.
+	*/
 	property int ResourceBossHealth
 	{
 		public get() { return GetEntProp( this.Ref, Prop_Send, "m_iBossHealthPercentageByte", 4, 0 ); }

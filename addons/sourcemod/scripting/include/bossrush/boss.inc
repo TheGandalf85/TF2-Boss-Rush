@@ -24,7 +24,7 @@ methodmap BRBaseBoss __nullable__ < CTFPlayer
 	/**
 	 * Function to get a value from the boss' table keymap.
 	 *
-	 * @param index			The index containing the value.
+	 * @param key			The key containing the value.
 	*/
 	public any GetKeyValue(char key[NAME_LENGTH])
 	{
@@ -36,7 +36,7 @@ methodmap BRBaseBoss __nullable__ < CTFPlayer
 	/**
 	 * Function to get a value from the boss' table keymap as a string.
 	 *
-	 * @param index			The index containing the value.
+	 * @param key			The key containing the value.
 	 * @param buffer		The buffer to store the string.
 	*/
 	public void GetKeyValueString(char key[NAME_LENGTH], char buffer[NAME_LENGTH])
@@ -47,8 +47,8 @@ methodmap BRBaseBoss __nullable__ < CTFPlayer
 	/**
 	 * Function to set a value to the boss' table keymap.
 	 *
-	 * @param index			The index to set the value.
-	 * @param value			Any value to set the index to.
+	 * @param key			The key to set the value.
+	 * @param value			Any value to set the key to.
 	*/
 	public bool SetKeyValue(char key[NAME_LENGTH], any value)
 	{
@@ -58,8 +58,8 @@ methodmap BRBaseBoss __nullable__ < CTFPlayer
 	/**
 	 * Function to set a value to the boss' table keymap.
 	 *
-	 * @param index			The index to set the value.
-	 * @param string		String to set the index to.
+	 * @param key			The key to set the value.
+	 * @param string		String to set the key to.
 	*/
 	public bool SetKeyValueString(char key[NAME_LENGTH], char string[NAME_LENGTH])
 	{
